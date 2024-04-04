@@ -27,6 +27,19 @@ builder.Services.AddScoped<IUsuariosService, UsuarioServices>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+//Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyOrigin",
+    builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+    });
+});
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -46,6 +59,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowMyOrigin");
 
 app.MapControllers();
 

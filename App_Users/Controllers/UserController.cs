@@ -55,15 +55,15 @@ namespace App_Users.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
-        public async Task<UsuariosDto?> GetEdit(GetByIdDto request)
+        public async Task<ActionResult<UsuariosDto?>> GetEdit(int request)
         {
             UsuariosDto? response = null;
 
             try
             {
-                response = await this.service.GetByIdAsync(request.Id);
+                response = await this.service.GetByIdAsync(request);
             }
             catch (Exception ex)
             {
